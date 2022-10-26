@@ -19,7 +19,6 @@ export const globalSlice = createSlice({
       state.stationNotifications.push(action.payload);
     },
     removeNotification: (state, action) => {
-      console.log(action);
       return state.stationNotifications.filter(
         (station) => station.stationID !== action.payload
       );
