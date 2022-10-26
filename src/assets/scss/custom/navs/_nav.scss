@@ -1,0 +1,41 @@
+// Nav wrapper
+.nav-wrapper {
+  padding: 1rem 0;
+  @include border-top-radius($card-border-radius);
+
+  + .card {
+    @include border-top-radius(0);
+    @include border-bottom-radius($card-border-radius);
+  }
+}
+
+// Nav links
+.nav-link {
+  color: $nav-link-color;
+
+  &:hover {
+    color: $nav-link-hover-color;
+    &.logout-link {
+      background-color: $danger !important;
+      color: white !important;
+    }
+  }
+
+  &.active {
+    color: $nav-link-hover-color;
+  }
+
+  i.ni {
+    position: relative;
+    top: 2px;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-item.logout {
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+  }
+}

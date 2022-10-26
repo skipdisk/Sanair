@@ -1,0 +1,67 @@
+//
+// Helper
+// helper classes for different cases
+//
+
+// Clearfix for sections that use float property
+
+.floatfix {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.loading-spinner span {
+  font-size: 2rem;
+  animation: fade 1s linear 0s infinite;
+  padding-right: 1rem;
+}
+
+.half-spinner {
+  width: 100px;
+  height: 100px;
+  border: 3px solid $primary;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear 0s infinite;
+}
+
+@keyframes bigger {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(2);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

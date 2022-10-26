@@ -1,0 +1,12 @@
+//
+// Header
+//
+
+.header {
+  position: relative;
+
+  @media (max-width: 768px) {
+    padding-top: 5rem !important;
+    padding-bottom: 3rem !important;
+  }
+}
