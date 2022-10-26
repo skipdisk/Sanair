@@ -28,6 +28,7 @@ export const createOrUpdateStation = async ({
   user,
 }) => {
   const userRef = doc(db, `users`, user.uid);
+
   const updateObject = {
     selectedStations: [...user.selectedStations, { title, stationID, status }],
   };

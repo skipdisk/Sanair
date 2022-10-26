@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
 import { Container, UncontrolledAlert } from "reactstrap";
@@ -10,14 +10,17 @@ import Sidebar from "components/Sidebar/Sidebar";
 import sanairLogo from "../assets/img/brand/sanair-logo-animated.svg";
 import routes from "routes.js";
 import { selectStationNotifications } from "store/global/selectors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { pollutionLevel } from "components/Cities/utils";
+import { removeNotification } from "store/global/slice";
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
   const stationNotifications = useSelector(selectStationNotifications);
-  React.useEffect(() => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     mainContent.current.scrollTop = 0;
@@ -66,26 +69,33 @@ const Admin = (props) => {
           <Footer />
         </Container>
       </div>
-      {stationNotifications.map(({ stationName, status, aqi }) => (
-        <div
-          style={{
-            position: "absolute",
-            bottom: "2rem",
-            right: "2rem",
-            zIndex: 9999,
-            float: "right",
-          }}
-        >
-          <UncontrolledAlert color={pollutionLevel(aqi).color} fade={false}>
-            <span className="alert-inner--icon">
-              <i className="ni ni-pin-3 ni-lg mr-2" />
-            </span>
-            <span className="alert-inner--text">
-              {stationName} is now {status} at <strong>{aqi}</strong> AQI.
-            </span>
-          </UncontrolledAlert>
-        </div>
-      ))}
+      {stationNotifications &&
+        stationNotifications.map(({ stationName, status, aqi, stationID }) => (
+          <div
+            style={{
+              position: "absolute",
+              bottom: "2rem",
+              right: "2rem",
+              zIndex: 9999,
+              float: "right",
+            }}
+          >
+            <UncontrolledAlert
+              toggle={(e) => {
+                dispatch(removeNotification(stationID));
+              }}
+              color={pollutionLevel(aqi).color}
+              fade={false}
+            >
+              <span className="alert-inner--icon">
+                <i className="ni ni-pin-3 ni-lg mr-2" />
+              </span>
+              <span className="alert-inner--text">
+                {stationName} is now {status} at <strong>{aqi}</strong> AQI.
+              </span>
+            </UncontrolledAlert>
+          </div>
+        ))}
     </>
   );
 };

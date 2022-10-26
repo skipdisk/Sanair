@@ -4,7 +4,6 @@ import { Card, CardTitle, Row, CardSubtitle, Button, Container } from "reactstra
 import { pollutionLevel } from "./utils";
 
 export const CityInfoWindow = ({ title, aqi, lastUpdated, stationID, stationName }) => {
-  console.log(title);
   const { status, color } = pollutionLevel(aqi);
   return (
     <Container fluid className="city-info">

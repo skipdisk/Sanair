@@ -40,7 +40,7 @@ const AddCityModal = ({ isAddModalOpen, toggleAddModal, station }) => {
     }
     const result = await createOrUpdateStation({
       user: user,
-      station: { ...station },
+      station: { ...stationWithTitle },
     });
     dispatch(setStations(result));
   };
